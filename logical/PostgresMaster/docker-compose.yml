@@ -1,0 +1,31 @@
+version: '2.0'
+
+#volumes:
+#  data_replication:
+
+networks:
+  default:
+    external:
+      name: postgres_network
+
+services:
+  pg_db:
+    build:
+      context: .
+      dockerfile: /opt/database/logical/PostgresMaster/postgresql
+    container_name: PostgresMasterlogical
+    image: postgres
+    restart: always
+#    user: "1002:1002"
+#    privileged: true
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=stage
+#      - PGDATA=/opt/database/logical/PostgresMaster/13
+    volumes:
+#      - pg_project:/opt/database/logical/PostgresMaster/13
+      - ./data/:/var/lib/postgresql/data
+#      - /opt/database/logical/data_basebackup:/var/lib/postgresql/data_basebackup
+    ports:
+      - 5432:5432

@@ -1,0 +1,7 @@
+FROM postgres:13.3
+RUN usermod -u 1002 postgres && groupmod -g 1002 postgres
+#USER 1002:1002
+
+#RUN pg_createcluster --start 13 main
+#RUN pg_createcluster -d /opt/database/PostgresSlave --start 13 main
+#RUN /etc/init.d/postgresql start
